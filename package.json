@@ -18,7 +18,7 @@
   ],
   "author": "Roman Pusec",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/rpusec/xmlstylizedconsolelog#readme",
+  "homepage": "https://bitbucket.org/rpusec/xmlstylizedconsolelog",
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-contrib-uglify": "^3.1.0"
