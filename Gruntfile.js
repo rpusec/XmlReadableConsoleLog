@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
 
 	var bannerText = '/*! \nXmlStylizedConsoleLog minified build, <%= grunt.template.today("dd.mm.yyyy.") %>\n';
-	bannerText += '<%= pkg.homepage %>\n*/';
+	bannerText += 'https://github.com/rpusec\n*/';
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
