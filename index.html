@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>xml color test</title>
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="xmlColorConsoleLog.js"></script>
+
+	<script type="text/javascript">
+		function test(){
+			var xmlTest = 	"<bookstore><book>" +
+							"<title attrOne=\"nest\" attrTwo=\"nest123\">Everyday Italian</title>" +
+							"<author>Giada De Laurentiis</author>" +
+							"<year attrThree=\"nest555\" >1994</year>" +
+							"</book></bookstore>";
+
+			XmlColorConsoleLog.colorize(xmlTest);
+		}
+	</script>
+
+</head>
+<body onload="test()">
+
+</body>
+</html>
