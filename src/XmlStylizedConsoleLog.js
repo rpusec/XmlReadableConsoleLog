@@ -27,6 +27,12 @@
 
 	var expectedStyles = [];
 
+	/**
+	 * Stylizes an XML printed on a browser's JS developer console.
+	 * @param {jQuery/String} $xml An xml either represented in string format or as a jQuery object. 
+	 * @requires jQuery (works well with ver 2.2.4)
+	 * @author rpusec
+	 */
 	function XmlStylizedConsoleLog($xml){
 		if(!$xml)
 			return;
@@ -43,6 +49,33 @@
 			expectedStyles.pop();
 	}
 
+	/**
+	 * Alters CSS used to represent a part of an XML. 
+	 * @param {String} type   Refers the node type of an XML file. Possible values include: 'element', 'attrName', 'attrValue', 'text'. 
+	 * @param {String} strCss The CSS markup in string format. Example: 'color: #cc0000; background-color: #000; ...'
+	 */
+	XmlStylizedConsoleLog.setCSS = function(type, strCss){
+		CSS[type] = strCss;
+	}
+
+	/**
+	 * Sets the size of tabs. 
+	 * @param {Integer} size The specified tab size. 
+	 */
+	XmlStylizedConsoleLog.setTabSize = function(size){
+		TAB = '';
+		for(var i = 0; i < size; i++)
+			TAB += ' ';
+	}
+
+	/**
+	 * Reads an XML object line by line, recreates the said XML by concatenating each 
+	 * individual node element to processedXmlStr parameter, and adds %c characters to specific positions. 
+	 * @param  {jQuery} $elementNode     Current element node in query. 
+	 * @param  {String} processedXmlStr  Currently processed XML string. 
+	 * @param  {Integer} tabAmount       The amount of tabs. 
+	 * @return {String}                  Processed string. 
+	 */
 	function readNodeElement($elementNode, processedXmlStr, tabAmount){
 		if(!processedXmlStr)
 			processedXmlStr = '';
@@ -119,9 +152,15 @@
 		return processedXmlStr;
 	}
 
-	function assocWith(strCss, xmlPart){
+	/**
+	 * Adds %c to a specific xml node. 
+	 * @param  {String} strCss     CSS in string format. 
+	 * @param  {String} xmlNodeStr Specified part/node of the xml
+	 * @return {String}            The XML node concatenated with the %c params. 
+	 */
+	function assocWith(strCss, xmlNodeStr){
 		expectedStyles.push(strCss, CSS.element);
-		return '%c' + xmlPart + '%c';
+		return '%c' + xmlNodeStr + '%c';
 	}
 
 	window.XmlStylizedConsoleLog = XmlStylizedConsoleLog;
