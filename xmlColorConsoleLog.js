@@ -13,13 +13,19 @@
 		'DocumentType': 10,
 		'DocumentFragment': 11,
 		'Notation': 12
-	}
+	};
 
-	var CONSTANTS = {
-		tab: '    '
-	}
+	var TAB = '    ';
+
+	var CSS = {
+		element: 'background-color: #000; color: #f00',
+		attrValue: 'background-color: #000; color: #0f0',
+		text: 'background-color: #000; color: #fff',
+	};
 
 	var ns = {};
+
+	var expectedStyles = [];
 
 	ns.colorize = function($xml){
 		if(!$xml)
@@ -28,7 +34,13 @@
 		if(typeof $xml === 'string')
 			$xml = $($.parseXML($xml));
 
-		console.log(readNodeElement($xml));
+		var convertedXmlStr = readNodeElement($xml);
+
+		expectedStyles.unshift(convertedXmlStr);
+		console.log.apply(console, expectedStyles);
+
+		while(expectedStyles.length > 0)
+			expectedStyles.pop();
 	}
 
 	function readNodeElement($elementNode, processedXmlStr, tabAmount){
@@ -40,8 +52,6 @@
 
 		$.each($elementNode, function(){
 			var $node = $(this);
-			
-			console.log($node);
 
 			var elemNode = $node[0];
 
@@ -49,10 +59,10 @@
 				case NODE_TYPES.Element : 
 
 					for(var i = 0; i < tabAmount; i++){
-						processedXmlStr += CONSTANTS.tab;
+						processedXmlStr += TAB;
 					}
 
-					processedXmlStr += '<' + elemNode.nodeName;
+					processedXmlStr += assocWith(CSS.element, '<' + elemNode.nodeName);
 
 					if(elemNode.attributes && elemNode.attributes.length > 0){
 						processedXmlStr += ' ';
@@ -61,8 +71,10 @@
 							var attr = elemNode.attributes.item(i);
 							processedXmlStr += attr.nodeName;
 
-							if(attr.nodeValue)
-								processedXmlStr += '=\"' + attr.nodeValue + '\"';
+							if(attr.nodeValue){
+								processedXmlStr += '=';
+								processedXmlStr += assocWith(CSS.attrValue, '\"' + attr.nodeValue + '\"');
+							}
 
 							if(i != attrLength - 1)
 								processedXmlStr += ' ';
@@ -78,7 +90,7 @@
 						elemNode.childNodes[0].nodeType === NODE_TYPES.Text && 
 						elemNode.childNodes[0].textContent)
 					{
-						processedXmlStr += elemNode.childNodes[0].textContent;
+						processedXmlStr += assocWith(CSS.text, elemNode.childNodes[0].textContent);
 						addTabs = false;
 					}
 					else{
@@ -88,7 +100,7 @@
 					processedXmlStr = readNodeElement($node.children(), processedXmlStr, tabAmount + 1);
 
 					for(var i = 0; addTabs && i < tabAmount; i++){
-						processedXmlStr += CONSTANTS.tab;
+						processedXmlStr += TAB;
 					}
 
 					processedXmlStr += '</' + elemNode.nodeName + '>\n\r';
@@ -98,12 +110,15 @@
 				case NODE_TYPES.DocumentFragment : 
 					processedXmlStr = readNodeElement($node.children(), processedXmlStr);
 					break;
-				//case NODE_TYPES.Notation : 
-				//	break;
 			}
 		});
 
 		return processedXmlStr;
+	}
+
+	function assocWith(strCss, xmlPart){
+		expectedStyles.push(strCss, CSS.element);
+		return '%c' + xmlPart + '%c';
 	}
 
 	window.XmlColorConsoleLog = ns;
