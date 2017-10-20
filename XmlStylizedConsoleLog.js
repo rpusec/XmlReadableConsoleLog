@@ -16,18 +16,18 @@
 	};
 
 	var TAB = '    ';
+	var NEW_LINE = '\n\r';
 
 	var CSS = {
-		element: 'background-color: #000; color: #f00',
-		attrValue: 'background-color: #000; color: #0f0',
-		text: 'background-color: #000; color: #fff',
+		element: 'color: #cc0000',
+		attrName: 'color: #ff8c1a',
+		attrValue: 'color: #6666ff',
+		text: 'color: #000',
 	};
-
-	var ns = {};
 
 	var expectedStyles = [];
 
-	ns.colorize = function($xml){
+	function XmlStylizedConsoleLog($xml){
 		if(!$xml)
 			return;
 
@@ -69,7 +69,7 @@
 
 						for(var i = 0, attrLength = elemNode.attributes.length; i < attrLength; i++){
 							var attr = elemNode.attributes.item(i);
-							processedXmlStr += attr.nodeName;
+							processedXmlStr += assocWith(CSS.attrName, attr.nodeName);
 
 							if(attr.nodeValue){
 								processedXmlStr += '=';
@@ -94,7 +94,7 @@
 						addTabs = false;
 					}
 					else{
-						processedXmlStr += '\n\r';
+						processedXmlStr += NEW_LINE;
 					}
 
 					processedXmlStr = readNodeElement($node.children(), processedXmlStr, tabAmount + 1);
@@ -103,7 +103,7 @@
 						processedXmlStr += TAB;
 					}
 
-					processedXmlStr += '</' + elemNode.nodeName + '>\n\r';
+					processedXmlStr += '</' + elemNode.nodeName + '>' + NEW_LINE;
 					break;
 				case NODE_TYPES.Document : 
 				case NODE_TYPES.DocumentType : 
@@ -121,6 +121,6 @@
 		return '%c' + xmlPart + '%c';
 	}
 
-	window.XmlColorConsoleLog = ns;
+	window.XmlStylizedConsoleLog = XmlStylizedConsoleLog;
 
 }());
