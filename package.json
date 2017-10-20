@@ -6,10 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://rpusec@bitbucket.org/rpusec/xmlstylizedconsolelog.git"
-  },
   "keywords": [
     "xml",
     "console",
@@ -18,7 +14,6 @@
   ],
   "author": "Roman Pusec",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/rpusec/xmlstylizedconsolelog",
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-contrib-uglify": "^3.1.0"
