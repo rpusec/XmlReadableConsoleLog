@@ -1,0 +1,22 @@
+{
+  "name": "xml-stylized-console-log",
+  "version": "1.0.0",
+  "description": "A JS library that adds CSS to an XML printed on a browser's JavaScript console.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://rpusec@bitbucket.org/rpusec/xmlstylizedconsolelog.git"
+  },
+  "keywords": [
+    "xml",
+    "console",
+    "log",
+    "javascript"
+  ],
+  "author": "Roman Pusec",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/rpusec/xmlstylizedconsolelog#readme"
+}

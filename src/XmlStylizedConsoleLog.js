@@ -93,6 +93,9 @@
 						processedXmlStr += assocWith(CSS.text, elemNode.childNodes[0].textContent);
 						addTabs = false;
 					}
+					else if(elemNode.childNodes && elemNode.childNodes.length == 0){
+						addTabs = false;
+					}
 					else{
 						processedXmlStr += NEW_LINE;
 					}
