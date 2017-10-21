@@ -50,7 +50,7 @@
 				customSettings.css = defaultSettings.css;
 			else
 			{
-				for(var sKey in customSettings.css){
+				for(var sKey in defaultSettings.css){
 					if(!customSettings.css.hasOwnProperty(sKey))
 						customSettings.css[sKey] = defaultSettings.css[sKey];
 				}
