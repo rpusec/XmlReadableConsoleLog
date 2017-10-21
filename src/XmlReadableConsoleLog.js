@@ -1,80 +1,90 @@
 (function(){
 
-	var NODE_TYPES = {
-		'Element': 1,
-		'Attr': 2,
-		'Text': 3,
-		'CDATASection': 4,
-		'EntryReference': 5,
-		'Entity': 6,
-		'ProcessingInstruction': 7,
-		'Comment': 8,
-		'Document': 9,
-		'DocumentType': 10,
-		'DocumentFragment': 11,
-		'Notation': 12
+	var ENUM = {
+		NODE_TYPES: {
+			'Element': 1,
+			'Attr': 2,
+			'Text': 3,
+			'CDATASection': 4,
+			'EntryReference': 5,
+			'Entity': 6,
+			'ProcessingInstruction': 7,
+			'Comment': 8,
+			'Document': 9,
+			'DocumentType': 10,
+			'DocumentFragment': 11,
+			'Notation': 12
+		},
+		NEW_LINE: '\n\r'
 	};
 
-	var TAB = '    ';
-	var NEW_LINE = '\n\r';
-
-	var CSS = {
-		element: 'color: #cc0000',
-		attrName: 'color: #ff8c1a',
-		attrValue: 'color: #6666ff',
-		text: 'color: #000',
+	var defaultSettings = {
+		tabSize: 4,
+		css: {
+			element: 'color: #cc0000',
+			attrName: 'color: #ff8c1a',
+			attrValue: 'color: #6666ff',
+			text: 'color: #000',
+		}
 	};
-
-	var expectedStyles = [];
 
 	/**
 	 * Main object. 
 	 * @param {XML/String} xml An xml either represented in string format or as an actual XML. 
 	 * @author rpusec
 	 */
-	function XmlReadableConsoleLog(xml){
+	function XmlReadableConsoleLog(xml, customSettings){
+		var xmlReadable = new XmlReadable(xml);
+		console.log.apply(console, xmlReadable.expectedStyles);
+	}
+
+	function XmlReadable(xml, customSettings){
+
+		if(typeof customSettings === 'object'){
+			if(!customSettings.hasOwnProperty('tabSize')){
+				customSettings.tabSize = defaultSettings.tabSize;
+				customSettings.tab = parseTabBySize(defaultSettings.tabSize);
+			}
+
+			if(!customSettings.hasOwnProperty('css'))
+				customSettings.css = defaultSettings.css;
+			else
+			{
+				for(var sKey in customSettings.css){
+					if(!customSettings.css.hasOwnProperty(sKey))
+						customSettings.css[sKey] = defaultSettings.css[sKey];
+				}
+			}
+
+			for(var key in customSettings)
+				this[key] = customSettings[key];
+		}
+		else
+		{
+			for(var key in defaultSettings)
+				this[key] = defaultSettings[key];
+			this['tab'] = parseTabBySize(defaultSettings.tabSize);
+		}
+
 		if(typeof xml === 'string')
 			xml = parseXML(xml);
 
-		var convertedXmlStr = readNodeElement(xml.childNodes);
-
-		expectedStyles.unshift(convertedXmlStr);
-		console.log.apply(console, expectedStyles);
-
-		while(expectedStyles.length > 0)
-			expectedStyles.pop();
+		this.expectedStyles = [];
+		this.readNodeElement(xml.childNodes);
+		this.expectedStyles.unshift(this.processedXmlStr);
 	}
 
-	/**
-	 * Alters CSS used to represent a part of an XML. 
-	 * @param {String} type   Refers the node type of an XML file. Possible values include: 'element', 'attrName', 'attrValue', 'text'. 
-	 * @param {String} strCss The CSS markup in string format. Example: 'color: #cc0000; background-color: #000; ...'
-	 */
-	XmlReadableConsoleLog.setCSS = function(type, strCss){
-		CSS[type] = strCss;
-	}
-
-	/**
-	 * Sets the size of tabs. 
-	 * @param {Integer} size The specified tab size. 
-	 */
-	XmlReadableConsoleLog.setTabSize = function(size){
-		TAB = '';
-		for(var i = 0; i < size; i++)
-			TAB += ' ';
-	}
+	var proto = XmlReadable.prototype;
 
 	/**
 	 * Reads an XML object line by line, recreates the said XML by concatenating each 
-	 * individual node element to processedXmlStr parameter, and adds %c characters to specific positions. 
+	 * individual node element to this.processedXmlStr parameter, and adds %c characters to specific positions. 
 	 * @param  {NodeList} childNodes     Current child nodes.
-	 * @param  {String} processedXmlStr  Currently processed XML string. 
-	 * @param  {Integer} tabAmount       The amount of tabs. 
 	 * @return {String}                  Processed string. 
 	 */
-	function readNodeElement(childNodes, processedXmlStr, tabAmount){
-		if(!processedXmlStr)
-			processedXmlStr = '';
+	proto.readNodeElement = function(childNodes, tabAmount){
+		if(!this.processedXmlStr)
+			this.processedXmlStr = '';
 
 		if(!tabAmount)
 			tabAmount = 0;
@@ -83,66 +93,66 @@
 			var elemNode = childNodes[elemNodeKey];
 
 			switch(parseInt(elemNode.nodeType)){
-				case NODE_TYPES.Element : 
+				case ENUM.NODE_TYPES.Element : 
 					for(var i = 0; i < tabAmount; i++){
-						processedXmlStr += TAB;
+						this.processedXmlStr += this.tab;
 					}
 
-					processedXmlStr += assocWith(CSS.element, '<' + elemNode.nodeName);
+					this.processedXmlStr += this.assocWith(this.css.element, '<' + elemNode.nodeName);
 
 					if(elemNode.attributes && elemNode.attributes.length > 0){
-						processedXmlStr += ' ';
+						this.processedXmlStr += ' ';
 
 						for(var i = 0, attrLength = elemNode.attributes.length; i < attrLength; i++){
 							var attr = elemNode.attributes.item(i);
-							processedXmlStr += assocWith(CSS.attrName, attr.nodeName);
+							this.processedXmlStr += this.assocWith(this.css.attrName, attr.nodeName);
 
 							if(attr.nodeValue){
-								processedXmlStr += '=';
-								processedXmlStr += assocWith(CSS.attrValue, '\"' + attr.nodeValue + '\"');
+								this.processedXmlStr += '=';
+								this.processedXmlStr += this.assocWith(this.css.attrValue, '\"' + attr.nodeValue + '\"');
 							}
 
 							if(i != attrLength - 1)
-								processedXmlStr += ' ';
+								this.processedXmlStr += ' ';
 						}
 					}
 
-					processedXmlStr += '>';
+					this.processedXmlStr += '>';
 
 					var addTabs = true;
 
 					if(elemNode.childNodes && 
 						elemNode.childNodes.length > 0 && 
-						elemNode.childNodes[0].nodeType === NODE_TYPES.Text && 
+						elemNode.childNodes[0].nodeType === ENUM.NODE_TYPES.Text && 
 						elemNode.childNodes[0].textContent)
 					{
-						processedXmlStr += assocWith(CSS.text, elemNode.childNodes[0].textContent);
+						this.processedXmlStr += this.assocWith(this.css.text, elemNode.childNodes[0].textContent);
 						addTabs = false;
 					}
 					else if(elemNode.childNodes && elemNode.childNodes.length == 0){
 						addTabs = false;
 					}
 					else{
-						processedXmlStr += NEW_LINE;
+						this.processedXmlStr += ENUM.NEW_LINE;
 					}
 
-					processedXmlStr = readNodeElement(elemNode.childNodes, processedXmlStr, tabAmount + 1);
+					this.readNodeElement(elemNode.childNodes, tabAmount + 1);
 
 					for(var i = 0; addTabs && i < tabAmount; i++){
-						processedXmlStr += TAB;
+						this.processedXmlStr += this.tab;
 					}
 
-					processedXmlStr += '</' + elemNode.nodeName + '>' + NEW_LINE;
+					this.processedXmlStr += '</' + elemNode.nodeName + '>' + ENUM.NEW_LINE;
 					break;
-				case NODE_TYPES.Document : 
-				case NODE_TYPES.DocumentType : 
-				case NODE_TYPES.DocumentFragment : 
-					processedXmlStr = readNodeElement(elemNode.childNodes, processedXmlStr);
+				case ENUM.NODE_TYPES.Document : 
+				case ENUM.NODE_TYPES.DocumentType : 
+				case ENUM.NODE_TYPES.DocumentFragment : 
+					this.readNodeElement(elemNode.childNodes, tabAmount);
 					break;
 			}
 		}
 
-		return processedXmlStr;
+		return this.processedXmlStr;
 	}
 
 	/**
@@ -151,11 +161,16 @@
 	 * @param  {String} xmlNodeStr Specified part/node of the xml
 	 * @return {String}            The XML node concatenated with the %c params. 
 	 */
-	function assocWith(strCss, xmlNodeStr){
-		expectedStyles.push(strCss, CSS.element);
+	proto.assocWith = function(strCss, xmlNodeStr){
+		this.expectedStyles.push(strCss, this.css.element);
 		return '%c' + xmlNodeStr + '%c';
 	}
 
+	/**
+	 * Parses an xml string to an actual xml. 
+	 * @param  {String} xml Xml string. 
+	 * @return {Xml}        Actual Xml.
+	 */
 	function parseXML(xml){
 		if ( window.DOMParser ) { // Standard
 			var tmp = new DOMParser();
@@ -167,6 +182,37 @@
 		}
 		return xml;
 	}
+
+	//global settings
+	var globalSettings = {};
+
+	/**
+	 * Alters CSS used to represent a part of an XML. 
+	 * @param {String} type   Refers the node type of an XML file. Possible values include: 'element', 'attrName', 'attrValue', 'text'. 
+	 * @param {String} strCss The CSS markup in string format. Example: 'color: #cc0000; background-color: #000; ...'
+	 */
+	globalSettings.setCSS = function(type, strCss){
+		defaultSettings.css[type] = strCss;
+	}
+
+	/**
+	 * Sets the size of tabs. 
+	 * @param {Integer} size The specified tab size. 
+	 */
+	globalSettings.setTabSize = function(size){
+		defaultSettings.tab = parseTabBySize(size);
+	}
+
+	function parseTabBySize(size) {
+		var tab = '';
+		for(var i = 0; i < size; i++)
+			tab += ' ';
+		return tab;
+	}
+
+	globalSettings.setTabSize(globalSettings.tabSize);
+
+	XmlReadableConsoleLog.globalSettings = globalSettings;
 
 	window.XmlReadableConsoleLog = XmlReadableConsoleLog;
 
