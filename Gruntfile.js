@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
 
-	var bannerText = '/*! \nXmlStylizedConsoleLog minified build, <%= grunt.template.today("dd.mm.yyyy.") %>\n';
+	var bannerText = '/*! \nXmlReadableConsoleLog minified build, <%= grunt.template.today("dd.mm.yyyy.") %>\n';
 	bannerText += 'https://github.com/rpusec\n*/';
 
 	grunt.initConfig({
@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 		    	banner: bannerText
 		    },
 		    build: {
-		    	src: 'src/XmlStylizedConsoleLog.js',
+		    	src: 'src/XmlReadableConsoleLog.js',
 		    	dest: 'build/<%= pkg.name %>.min.js'
 		    }
 		}
