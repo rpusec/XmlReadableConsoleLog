@@ -1,7 +1,7 @@
 {
   "name": "xml-readable-console-log",
   "version": "1.0.0",
-  "description": "A JS library that adds CSS to an XML output displayed on a browser's JavaScript console.",
+  "description": "A JS library that stylizes XML within a browser's JS console.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
