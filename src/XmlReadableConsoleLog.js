@@ -34,7 +34,7 @@
 	 * @author rpusec
 	 */
 	function XmlReadableConsoleLog(xml, customSettings){
-		var xmlReadable = new XmlReadable(xml);
+		var xmlReadable = new XmlReadable(xml, customSettings);
 		console.log.apply(console, xmlReadable.expectedStyles);
 	}
 
@@ -58,6 +58,7 @@
 
 			for(var key in customSettings)
 				this[key] = customSettings[key];
+			this['tab'] = parseTabBySize(customSettings.tabSize);
 		}
 		else
 		{

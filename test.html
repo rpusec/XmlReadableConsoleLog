@@ -2,31 +2,40 @@
 <html>
 <head>
 	<title>xml color test</title>
-	<script type="text/javascript" src="build/xml-readable-console-log.min.js"></script>
-	<!--<script type="text/javascript" src="src/XmlReadableConsoleLog.js"></script>-->
+	<!--<script type="text/javascript" src="build/xml-readable-console-log.min.js"></script>-->
+	<script type="text/javascript" src="src/XmlReadableConsoleLog.js"></script>
 
 	<script type="text/javascript">
-		function test(){
-			var xmlTest = 	"<bookstore>" +
-							"<book>" + 
-							"<title attrOne=\"valueOne\" attrTwo=\"valueTwo\" attrThree=\"valueThree\">Lorem ipsum dolor sit amet.</title>" +
-							"<author>Aenean malesuada</author>" +
-							"<year attrThree=\"test\" >1980</year>" +
-							"</book>" + 
-							"<book>" + 
-							"<title attrOne=\"valueOne\" emptyAttr=\"\">Nunc nisl purus, viverra vitae.</title>" +
-							"<author>In quis</author>" +
-							"<year attrThree=\"test\" dashed-attr=\"test\">1999</year>" +
-							"</book>" + 
-							"</bookstore>";
+		var xmlTest = 	"<bookstore>" +
+						"<book>" + 
+						"<title attrOne=\"valueOne\" attrTwo=\"valueTwo\" attrThree=\"valueThree\">Lorem ipsum dolor sit amet.</title>" +
+						"<author>Aenean malesuada</author>" +
+						"<year attrThree=\"test\" >1980</year>" +
+						"</book>" + 
+						"<book>" + 
+						"<title attrOne=\"valueOne\" emptyAttr=\"\">Nunc nisl purus, viverra vitae.</title>" +
+						"<author>In quis</author>" +
+						"<year attrThree=\"test\" dashed-attr=\"test\">1999</year>" +
+						"</book>" + 
+						"</bookstore>";
 
-			XmlReadableConsoleLog(xmlTest);
-			XmlReadableConsoleLog(xmlTest);
-		}
+		//with default settings
+		XmlReadableConsoleLog(xmlTest);
+
+		//with custom settings
+		XmlReadableConsoleLog(xmlTest, {
+			tabSize: 7,
+			css: {
+				element: 'color: #0a1429',
+				attrName: 'color: #00cc99',
+				attrValue: 'color: #b3b3ff',
+				text: 'color: #ff6600',
+			}
+		});
 	</script>
 
 </head>
-<body onload="test()">
+<body>
 
 </body>
 </html>
