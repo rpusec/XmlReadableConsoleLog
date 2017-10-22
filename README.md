@@ -2,12 +2,32 @@
 
 This is a JavaScript library that allows you to print out your XML data on your browser's console in a readable way, by making use of `console.log`'s CSS parsing functionality. 
 
-# Examples #
-
 Say you for instance recieve a server response that contains some XML data, the value itself might look something in the lines of: 
 
-```javascript
-"<bookstore><book><title attrOne=\"valueOne\" attrTwo=\"valueTwo\" attrThree=\"valueThree\">Lorem ipsum dolor sit amet.</title><author>Aenean malesuada</author><year attrThree=\"test\" >1980</year></book><book><author>In quis</author><year attrThree=\"test\" dashed-attr=\"test\">1999</year></book></bookstore>"
-```
+add image
 
-If you print out that value in your browser's console for debugging purposes, it'd be all in one line and unreadable like above. 
+Which is clearly unreadable, but by using this library, the XML data would be displayed as following: 
+
+add image
+
+# Examples #
+
+To pretty print the XML data, simply call `XmlReadableConsoleLog` and add the XML data either in `String` format or as an actual `XML` object. Alternatively, you can also add your own custom settings in the second parameter as the second parameter. See the example below. 
+
+```javascript 
+
+//with default settings
+XmlReadableConsoleLog(xml);
+
+//with custom settings
+XmlReadableConsoleLog(xmlTest, {
+	tabSize: 7,
+	css: {
+		element: 'color: #0a1429',
+		attrName: 'color: #00cc99',
+		attrValue: 'color: #b3b3ff',
+		text: 'color: #ff6600',
+	}
+});
+
+```
