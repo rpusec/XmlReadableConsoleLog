@@ -5,7 +5,7 @@ This library is used specifically for debugging purposes.
 
 ## Examples ##
 
-Let's say that you receive a server response that contains some XML data in string format, and you print it out on your JS console, the value itself might look something in the lines of: 
+Let's say that you receive a server response that contains some XML data in string format, and you print it out on your JS console, the value itself might look something along the lines of: 
 
 ![unreadable](imgs/xml_unreadable.png)
 
