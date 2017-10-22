@@ -15,12 +15,18 @@ add image
 
 # API #
 
-Simply call `XmlReadableConsoleLog` and add the XML data either as a `String` or as an actual `XML` object. Alternatively, you can also add your own custom settings as the second parameter. 
+Simply call `XmlReadableConsoleLog` and add the XML data either as a `String` or as an actual `XML` object. 
 
 ```javascript 
 
 //without custom settings
 XmlReadableConsoleLog(xml);
+
+```
+
+Alternatively, you can also add your own custom settings as the second parameter (These are all of the custom settings that can be applied). 
+
+```javascript 
 
 //with custom settings
 XmlReadableConsoleLog(xml, {
@@ -33,7 +39,22 @@ XmlReadableConsoleLog(xml, {
 	}
 });
 
+``` 
+
+Another option is to use the `XmlReadableConsoleLog.globalSettings` object to set your own default settings. 
+
+To change the default CSS for `element`, `attrName`, `attrValue`, and `text`:
+
+```javascript
+
+XmlReadableConsoleLog.globalSettings.setCSS('element', 'color: #000');
+
 ```
 
-These are all of the custom settings that can be applied. 
+To setup the default tab size, use: 
 
+```javascript
+
+XmlReadableConsoleLog.globalSettings.setTabSize(7);
+
+```
