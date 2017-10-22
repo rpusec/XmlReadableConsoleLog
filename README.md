@@ -15,6 +15,8 @@ Which is clearly unreadable, but this library allows you to display our data as:
 
 # API #
 
+## XmlReadableConsoleLog(xmlData, settings) ##
+
 Simply call `XmlReadableConsoleLog` and add the XML data either as a `String` or as an actual `XML` object. 
 
 ```javascript 
@@ -45,7 +47,11 @@ The output for the above custom settings will look like:
 
 ![custom settings](imgs/xml_readable_custom.png)
 
+## globalSettings ##
+
 Another option is to use the `XmlReadableConsoleLog.globalSettings` object to override the default settings. 
+
+### globalSettings.setCSS(String, String) and globalSettings.setTabSize(Integer) ###
 
 To change the default CSS for `element`, `attrName`, `attrValue`, or `text`, use the `XmlReadableConsoleLog.globalSettings.setCSS(String, String)` and add one of the attributes as the first parameter and the CSS markup as the second.
 To override the default tab size, use `XmlReadableConsoleLog.globalSettings.setTabSize(Integer)`. 
