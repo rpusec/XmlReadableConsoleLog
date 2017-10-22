@@ -7,7 +7,7 @@ This library is used specifically for debugging purposes which involves handling
 
 Let's say you receive a server response that contains some XML data, and you print it out on your JS console, the value itself might look something in the lines of: 
 
-add image
+![unreadable](imgs/xml_unreadable.png)
 
 Which is clearly unreadable, but this library allows you to display our data as:  
 
