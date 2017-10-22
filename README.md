@@ -3,7 +3,7 @@
 This is a JavaScript library that allows you to print out your XML data on your browser's console in a readable way, by making use of `console.log`'s CSS parsing functionality. 
 This library is used specifically for debugging purposes which involves handling XML data. 
 
-# Examples #
+## Examples ##
 
 Let's say you receive a server response that contains some XML data, and you print it out on your JS console, the value itself might look something in the lines of: 
 
@@ -13,9 +13,9 @@ Which is clearly unreadable, but this library allows you to display our data as:
 
 ![readable](imgs/xml_readable.png)
 
-# API #
+## API ##
 
-## XmlReadableConsoleLog(xmlData, settings) ##
+### XmlReadableConsoleLog(xmlData, settings) ###
 
 Simply call `XmlReadableConsoleLog` and add the XML data either as a `String` or as an actual `XML` object. 
 
@@ -47,7 +47,7 @@ The output for the above custom settings will look like:
 
 ![custom settings](imgs/xml_readable_custom.png)
 
-## XmlReadableConsoleLog.globalSettings ##
+### XmlReadableConsoleLog.globalSettings ###
 
 Another option is to use the `XmlReadableConsoleLog.globalSettings` object to override the default settings. 
 
