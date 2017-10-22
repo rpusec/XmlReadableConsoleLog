@@ -105,15 +105,17 @@
 						this.processedXmlStr += ' ';
 
 						for(var i = 0, attrLength = elemNode.attributes.length; i < attrLength; i++){
+							var notLastItem = (i != attrLength - 1);
+
 							var attr = elemNode.attributes.item(i);
-							this.processedXmlStr += this.assocWith(this.css.attrName, attr.nodeName);
+							this.processedXmlStr += this.assocWith(this.css.attrName, attr.nodeName, notLastItem ? false : !attr.nodeValue);
 
 							if(attr.nodeValue){
 								this.processedXmlStr += '=';
-								this.processedXmlStr += this.assocWith(this.css.attrValue, '\"' + attr.nodeValue + '\"');
+								this.processedXmlStr += this.assocWith(this.css.attrValue, '\"' + attr.nodeValue + '\"', !notLastItem);
 							}
 
-							if(i != attrLength - 1)
+							if(notLastItem)
 								this.processedXmlStr += ' ';
 						}
 					}
@@ -152,8 +154,6 @@
 					break;
 			}
 		}
-
-		return this.processedXmlStr;
 	}
 
 	/**
@@ -162,9 +162,19 @@
 	 * @param  {String} xmlNodeStr Specified part/node of the xml
 	 * @return {String}            The XML node concatenated with the %c params. 
 	 */
-	proto.assocWith = function(strCss, xmlNodeStr){
-		this.expectedStyles.push(strCss, this.css.element);
-		return '%c' + xmlNodeStr + '%c';
+	proto.assocWith = function(strCss, xmlNodeStr, addElemCSS){
+		if(typeof addElemCSS === 'undefined')
+			addElemCSS = true;
+
+		this.expectedStyles.push(strCss);
+		var res = '%c' + xmlNodeStr;
+
+		if(addElemCSS){
+			this.expectedStyles.push(this.css.element);
+			res += '%c';
+		}
+
+		return res;
 	}
 
 	/**
