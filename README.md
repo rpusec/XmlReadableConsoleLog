@@ -41,6 +41,10 @@ XmlReadableConsoleLog(xml, {
 
 ``` 
 
+The output for the above custom settings will look like: 
+
+![custom settings](imgs/xml_readable_custom.png)
+
 Another option is to use the `XmlReadableConsoleLog.globalSettings` object to override the default settings. 
 
 To change the default CSS for `element`, `attrName`, `attrValue`, or `text`, use the `XmlReadableConsoleLog.globalSettings.setCSS(String, String)` and add one of the attributes as the first parameter and the CSS markup as the second.
