@@ -56,10 +56,10 @@ The following code demonstrates the `setCSS` and `setTabSize` functions.
 //setting up the global settings
 XmlReadableConsoleLog.globalSettings.setCSS('element', 'color: #000');
 XmlReadableConsoleLog.globalSettings.setCSS('attrName', 'color: #737373');
-XmlReadableConsoleLog.globalSettings.setCSS('attrValue', 'color: #a6a6a6');
-XmlReadableConsoleLog.globalSettings.setCSS('text', 'color: #333333');
+XmlReadableConsoleLog.globalSettings.setCSS('attrValue', 'color: #a6a6a6; font-weight: bold;');
+XmlReadableConsoleLog.globalSettings.setCSS('text', 'color: #fff; background-color: #000');
 
-XmlReadableConsoleLog.globalSettings.setTabSize(10);
+XmlReadableConsoleLog.globalSettings.setTabSize(2);
 
 XmlReadableConsoleLog(xml);
 
