@@ -2,8 +2,8 @@
 <html>
 <head>
 	<title>xml color test</title>
-	<script type="text/javascript" src="build/xml-readable-console-log.min.js"></script>
-	<!--<script type="text/javascript" src="src/XmlReadableConsoleLog.js"></script>-->
+	<!--<script type="text/javascript" src="build/xml-readable-console-log.min.js"></script>-->
+	<script type="text/javascript" src="src/XmlReadableConsoleLog.js"></script>
 
 	<script type="text/javascript">
 		var xml = 	"<bookstore>" +
@@ -39,10 +39,17 @@
 		});
 
 		//setting up the global settings
-		XmlReadableConsoleLog.globalSettings.setCSS('element', 'color: #000');
+		/*XmlReadableConsoleLog.globalSettings.setCSS('element', 'color: #000');
 		XmlReadableConsoleLog.globalSettings.setCSS('attrName', 'color: #737373');
 		XmlReadableConsoleLog.globalSettings.setCSS('attrValue', 'color: #a6a6a6; font-weight: bold;');
-		XmlReadableConsoleLog.globalSettings.setCSS('text', 'color: #fff; background-color: #000');
+		XmlReadableConsoleLog.globalSettings.setCSS('text', 'color: #fff; background-color: #000');*/
+
+		XmlReadableConsoleLog.globalSettings.setCSS({
+			element: 'color: #000',
+			attrName: 'color: #737373',
+			attrValue: 'color: #a6a6a6; font-weight: bold;',
+			text: 'color: #fff; background-color: #000'
+		});
 
 		XmlReadableConsoleLog.globalSettings.setTabSize(2);
 
@@ -51,6 +58,6 @@
 
 </head>
 <body>
-
+	Check the JS console. 
 </body>
 </html>

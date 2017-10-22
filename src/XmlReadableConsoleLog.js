@@ -199,11 +199,26 @@
 
 	/**
 	 * Alters CSS used to represent a part of an XML. 
+	 *
+	 * //first option
 	 * @param {String} type   Refers the node type of an XML file. Possible values include: 'element', 'attrName', 'attrValue', 'text'. 
 	 * @param {String} strCss The CSS markup in string format. Example: 'color: #cc0000; background-color: #000; ...'
+	 *
+	 * //second option
+	 * @param {Object} params CSS custom props as Key-value pairs 
 	 */
-	globalSettings.setCSS = function(type, strCss){
-		defaultSettings.css[type] = strCss;
+	globalSettings.setCSS = function(){
+		if(arguments.length == 2 && typeof arguments[0] === 'string' && typeof arguments[1] === 'string'){
+			var type = arguments[0];
+			var strCss = arguments[1];
+			defaultSettings.css[type] = strCss;
+		}
+		else if(typeof arguments[0] === 'object'){
+			var params = arguments[0];
+			for(var cssKey in params){
+				defaultSettings.css[cssKey] = params[cssKey];
+			}
+		}
 	}
 
 	/**
