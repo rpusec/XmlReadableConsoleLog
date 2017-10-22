@@ -15,14 +15,14 @@ Which is clearly unreadable, but this library allows you to display your data as
 
 ## API ##
 
-### XmlReadableConsoleLog(xmlData, settings) ###
+### xmlReadableLog(xmlData, settings) ###
 
-Simply call `XmlReadableConsoleLog` and add the XML data either as a `String` or as an actual `XML` object. 
+Simply call `xmlReadableLog` and add the XML data either as a `String` or as an actual `XML` object. 
 
 ```javascript 
 
 //without custom settings
-XmlReadableConsoleLog(xml);
+xmlReadableLog(xml);
 
 ```
 
@@ -31,7 +31,7 @@ Alternatively, you can also add your own custom settings as the second parameter
 ```javascript 
 
 //with custom settings
-XmlReadableConsoleLog(xml, {
+xmlReadableLog(xml, {
 	tabSize: 7,
 	css: {
 		element: 'color: #0a1429',
@@ -47,25 +47,25 @@ The output for the above example will look like:
 
 ![custom settings](imgs/xml_readable_custom.png)
 
-### XmlReadableConsoleLog.globalSettings ###
+### xmlReadableLog.globalSettings ###
 
-Another option is to use the `XmlReadableConsoleLog.globalSettings` object to override the default settings. 
+Another option is to use the `xmlReadableLog.globalSettings` object to override the default settings. 
 
-To change the default CSS for `element`, `attrName`, `attrValue`, or `text`, use the `XmlReadableConsoleLog.globalSettings.setCSS(String, String)` and add one of the attributes as the first parameter and the CSS markup as the second.
+To change the default CSS for `element`, `attrName`, `attrValue`, or `text`, use the `xmlReadableLog.globalSettings.setCSS(String, String)` and add one of the attributes as the first parameter and the CSS markup as the second.
 
-To override the default tab size, use `XmlReadableConsoleLog.globalSettings.setTabSize(Integer)`. 
+To override the default tab size, use `xmlReadableLog.globalSettings.setTabSize(Integer)`. 
 
 The following code demonstrates the `setCSS` and `setTabSize` functions.  
 
 ```javascript
 
 //setting up the global settings
-XmlReadableConsoleLog.globalSettings.setCSS('element', 'color: #000');
-XmlReadableConsoleLog.globalSettings.setCSS('attrName', 'color: #737373');
-XmlReadableConsoleLog.globalSettings.setCSS('attrValue', 'color: #a6a6a6; font-weight: bold;');
-XmlReadableConsoleLog.globalSettings.setCSS('text', 'color: #fff; background-color: #000');
-XmlReadableConsoleLog.globalSettings.setTabSize(2);
-XmlReadableConsoleLog(xml);
+xmlReadableLog.globalSettings.setCSS('element', 'color: #000');
+xmlReadableLog.globalSettings.setCSS('attrName', 'color: #737373');
+xmlReadableLog.globalSettings.setCSS('attrValue', 'color: #a6a6a6; font-weight: bold;');
+xmlReadableLog.globalSettings.setCSS('text', 'color: #fff; background-color: #000');
+xmlReadableLog.globalSettings.setTabSize(2);
+xmlReadableLog(xml);
 
 ```
 
@@ -73,7 +73,7 @@ Alternatively, you can pass a key-value paired object to apply the custom CSS se
 
 ```javascript 
 
-XmlReadableConsoleLog.globalSettings.setCSS({
+xmlReadableLog.globalSettings.setCSS({
 	element: 'color: #000',
 	attrName: 'color: #737373',
 	attrValue: 'color: #a6a6a6; font-weight: bold;',
