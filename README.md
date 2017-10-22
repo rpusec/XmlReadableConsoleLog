@@ -7,11 +7,11 @@ This library is used specifically for debugging purposes.
 
 Let's say that you receive a server response that contains some XML data in string format, and you print it out on your JS console, the value itself might look something along the lines of: 
 
-![unreadable](imgs/xml_unreadable.png)
+![unreadable](docs/imgs/xml_unreadable.png)
 
 Which is clearly unreadable, but this library allows you to display your data as:  
 
-![readable](imgs/xml_readable.png)
+![readable](docs/imgs/xml_readable.png)
 
 ## API ##
 
@@ -45,7 +45,7 @@ xmlReadableLog(xml, {
 
 The output for the above example will look like: 
 
-![custom settings](imgs/xml_readable_custom.png)
+![custom settings](docs/imgs/xml_readable_custom.png)
 
 ### xmlReadableLog.globalSettings ###
 
@@ -84,4 +84,4 @@ xmlReadableLog.globalSettings.setCSS({
 
 The above result will look like: 
 
-![global custom settings](imgs/xml_w_global_settings.png)
+![global custom settings](docs/imgs/xml_w_global_settings.png)
