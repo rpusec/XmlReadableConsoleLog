@@ -3,6 +3,8 @@
 This is a JavaScript library that allows you to print out your XML data on your browser's console in a readable way, by making use of `console.log`'s CSS parsing functionality. 
 This library is used specifically for debugging purposes.
 
+Keep in mind that you can display your XML readably without this API, browsers do that natively. However, this library still leverages the ability to display your data in a customizable way. 
+
 ## Examples ##
 
 Let's say that you receive a server response that contains some XML data in string format, and you print it out on your JS console, the value itself might look something along the lines of: 
