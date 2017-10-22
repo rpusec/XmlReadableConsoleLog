@@ -97,4 +97,4 @@ Known browsers that do support CSS formating are:
 * [Chrome](https://developers.google.com/web/tools/chrome-devtools/console/console-write#string_substitution_and_formatting)
 * [Mozilla](https://developer.mozilla.org/en-US/docs/Web/API/Console#Styling_console_output)
 
-Moreover, if you're using a browser that does not support CSS formatting, you won't run into any major issues or errors, the only thing that will happen is that the CSS won't be applied. 
+Moreover, if you're using a browser that does not support CSS formatting, you won't run into any major issues or errors, the only thing that will happen is that the CSS won't be applied in the console. 
