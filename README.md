@@ -1,15 +1,15 @@
 # XmlReadableConsoleLog #
 
 This is a JavaScript library that allows you to print out your XML data on your browser's console in a readable way, by making use of `console.log`'s CSS parsing functionality. 
-This library is used specifically for debugging purposes which involves handling XML data. 
+This library is used specifically for debugging purposes.
 
 ## Examples ##
 
-Let's say you receive a server response that contains some XML data, and you print it out on your JS console, the value itself might look something in the lines of: 
+Let's say that you receive a server response that contains some XML data in string format, and you print it out on your JS console, the value itself might look something in the lines of: 
 
 ![unreadable](imgs/xml_unreadable.png)
 
-Which is clearly unreadable, but this library allows you to display our data as:  
+Which is clearly unreadable, but this library allows you to display your data as:  
 
 ![readable](imgs/xml_readable.png)
 
@@ -43,7 +43,7 @@ XmlReadableConsoleLog(xml, {
 
 ``` 
 
-The output for the above custom settings will look like: 
+The output for the above example will look like: 
 
 ![custom settings](imgs/xml_readable_custom.png)
 
@@ -52,7 +52,9 @@ The output for the above custom settings will look like:
 Another option is to use the `XmlReadableConsoleLog.globalSettings` object to override the default settings. 
 
 To change the default CSS for `element`, `attrName`, `attrValue`, or `text`, use the `XmlReadableConsoleLog.globalSettings.setCSS(String, String)` and add one of the attributes as the first parameter and the CSS markup as the second.
+
 To override the default tab size, use `XmlReadableConsoleLog.globalSettings.setTabSize(Integer)`. 
+
 The following code demonstrates the `setCSS` and `setTabSize` functions.  
 
 ```javascript
