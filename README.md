@@ -20,7 +20,7 @@ To pretty print the XML data, simply call `XmlReadableConsoleLog` and add the XM
 XmlReadableConsoleLog(xml);
 
 //with custom settings
-XmlReadableConsoleLog(xmlTest, {
+XmlReadableConsoleLog(xml, {
 	tabSize: 7,
 	css: {
 		element: 'color: #0a1429',
@@ -31,3 +31,6 @@ XmlReadableConsoleLog(xmlTest, {
 });
 
 ```
+
+These are all of the custom settings that can be applied. 
+
