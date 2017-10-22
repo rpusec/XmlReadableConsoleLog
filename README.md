@@ -43,18 +43,20 @@ XmlReadableConsoleLog(xml, {
 
 Another option is to use the `XmlReadableConsoleLog.globalSettings` object to override the default settings. 
 
-To change the default CSS for `element`, `attrName`, `attrValue`, or `text`, add one of these attributes as the first parameter and the CSS markup as the second:
+To change the default CSS for `element`, `attrName`, `attrValue`, or `text`, use the `XmlReadableConsoleLog.globalSettings.setCSS(String, String)` and add one of the attributes as the first parameter and the CSS markup as the second.
+To override the default tab size, use `XmlReadableConsoleLog.globalSettings.setTabSize(Integer)`. 
+The following code demonstrates the `setCSS` and `setTabSize` functions.  
 
 ```javascript
 
-XmlReadableConsoleLog.globalSettings.setCSS('attrName', 'color: #000');
+//setting up the global settings
+XmlReadableConsoleLog.globalSettings.setCSS('element', 'color: #000');
+XmlReadableConsoleLog.globalSettings.setCSS('attrName', 'color: #737373');
+XmlReadableConsoleLog.globalSettings.setCSS('attrValue', 'color: #a6a6a6');
+XmlReadableConsoleLog.globalSettings.setCSS('text', 'color: #333333');
 
-```
+XmlReadableConsoleLog.globalSettings.setTabSize(10);
 
-To override the default tab size, use: 
-
-```javascript
-
-XmlReadableConsoleLog.globalSettings.setTabSize(7);
+XmlReadableConsoleLog(xml);
 
 ```
