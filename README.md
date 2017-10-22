@@ -64,10 +64,21 @@ XmlReadableConsoleLog.globalSettings.setCSS('element', 'color: #000');
 XmlReadableConsoleLog.globalSettings.setCSS('attrName', 'color: #737373');
 XmlReadableConsoleLog.globalSettings.setCSS('attrValue', 'color: #a6a6a6; font-weight: bold;');
 XmlReadableConsoleLog.globalSettings.setCSS('text', 'color: #fff; background-color: #000');
-
 XmlReadableConsoleLog.globalSettings.setTabSize(2);
-
 XmlReadableConsoleLog(xml);
+
+```
+
+Alternatively, you can pass a key-value paired object to apply the custom CSS settings: 
+
+```javascript 
+
+XmlReadableConsoleLog.globalSettings.setCSS({
+	element: 'color: #000',
+	attrName: 'color: #737373',
+	attrValue: 'color: #a6a6a6; font-weight: bold;',
+	text: 'color: #fff; background-color: #000'
+});
 
 ```
 
