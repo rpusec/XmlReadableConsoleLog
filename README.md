@@ -53,7 +53,8 @@ The output for the above example will look like:
 
 Another option is to use the `xmlReadableLog.globalSettings` object to override the default settings. 
 
-To change the default CSS for `element`, `attrName`, `attrValue`, or `text`, use the `xmlReadableLog.globalSettings.setCSS(String, String)` and add one of the attributes as the first parameter and the CSS markup as the second.
+To change the default CSS for `element`, `attrName`, `attrValue`, or `text`, call the `xmlReadableLog.globalSettings.setCSS(String, String)` and add one of the attributes as the first parameter and 
+the CSS markup as the second.
 
 To override the default tab size, use `xmlReadableLog.globalSettings.setTabSize(Integer)`. 
 
