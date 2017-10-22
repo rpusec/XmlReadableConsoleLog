@@ -25,10 +25,10 @@
 		console.log(xml);
 
 		//with default settings
-		XmlReadableConsoleLog(xml);
+		xmlReadableLog(xml);
 
 		//with custom settings
-		XmlReadableConsoleLog(xml, {
+		xmlReadableLog(xml, {
 			tabSize: 7,
 			css: {
 				element: 'color: #0a1429',
@@ -44,16 +44,16 @@
 		XmlReadableConsoleLog.globalSettings.setCSS('attrValue', 'color: #a6a6a6; font-weight: bold;');
 		XmlReadableConsoleLog.globalSettings.setCSS('text', 'color: #fff; background-color: #000');*/
 
-		XmlReadableConsoleLog.globalSettings.setCSS({
+		xmlReadableLog.globalSettings.setCSS({
 			element: 'color: #000',
 			attrName: 'color: #737373',
 			attrValue: 'color: #a6a6a6; font-weight: bold;',
 			text: 'color: #fff; background-color: #000'
 		});
 
-		XmlReadableConsoleLog.globalSettings.setTabSize(2);
+		xmlReadableLog.globalSettings.setTabSize(2);
 
-		XmlReadableConsoleLog(xml);
+		xmlReadableLog(xml);
 	</script>
 
 </head>

@@ -240,6 +240,6 @@
 
 	XmlReadableConsoleLog.globalSettings = globalSettings;
 
-	window.XmlReadableConsoleLog = XmlReadableConsoleLog;
+	window.xmlReadableLog = XmlReadableConsoleLog;
 
 }());
