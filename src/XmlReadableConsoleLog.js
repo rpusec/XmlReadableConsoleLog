@@ -201,7 +201,7 @@
 	 * @param {Integer} size The specified tab size. 
 	 */
 	globalSettings.setTabSize = function(size){
-		defaultSettings.tab = parseTabBySize(size);
+		defaultSettings.tabSize = size;
 	}
 
 	function parseTabBySize(size) {
@@ -211,7 +211,7 @@
 		return tab;
 	}
 
-	globalSettings.setTabSize(globalSettings.tabSize);
+	globalSettings.setTabSize(defaultSettings.tabSize);
 
 	XmlReadableConsoleLog.globalSettings = globalSettings;
 
