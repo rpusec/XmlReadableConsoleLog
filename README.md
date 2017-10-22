@@ -71,7 +71,7 @@ xmlReadableLog(xml);
 
 ```
 
-Alternatively, you can pass a key-value paired object to apply the custom CSS settings: 
+Alternatively, you can pass a key-value paired object to apply your custom CSS settings: 
 
 ```javascript 
 
