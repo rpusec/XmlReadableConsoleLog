@@ -11,7 +11,7 @@ Let's say you receive a server response that contains some XML data, and you pri
 
 Which is clearly unreadable, but this library allows you to display our data as:  
 
-![unreadable](imgs/xml_unreadable.png)
+![readable](imgs/xml_readable.png)
 
 # API #
 
