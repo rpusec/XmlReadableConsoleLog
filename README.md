@@ -1,22 +1,25 @@
 # XmlReadableConsoleLog #
 
 This is a JavaScript library that allows you to print out your XML data on your browser's console in a readable way, by making use of `console.log`'s CSS parsing functionality. 
-
-Say you for instance recieve a server response that contains some XML data, the value itself might look something in the lines of: 
-
-add image
-
-Which is clearly unreadable, but by using this library, the XML data would be displayed as following: 
-
-add image
+This library is used specifically for debugging purposes which involves handling XML data. 
 
 # Examples #
 
-To pretty print the XML data, simply call `XmlReadableConsoleLog` and add the XML data either in `String` format or as an actual `XML` object. Alternatively, you can also add your own custom settings in the second parameter as the second parameter. See the example below. 
+Let's say you receive a server response that contains some XML data, and you print it out on your JS console, the value itself might look something in the lines of: 
+
+add image
+
+Which is clearly unreadable, but this library allows you to display our data as:  
+
+add image
+
+# API #
+
+Simply call `XmlReadableConsoleLog` and add the XML data either as a `String` or as an actual `XML` object. Alternatively, you can also add your own custom settings as the second parameter. 
 
 ```javascript 
 
-//with default settings
+//without custom settings
 XmlReadableConsoleLog(xml);
 
 //with custom settings
