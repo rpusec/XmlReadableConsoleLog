@@ -64,3 +64,7 @@ XmlReadableConsoleLog.globalSettings.setTabSize(2);
 XmlReadableConsoleLog(xml);
 
 ```
+
+The above result will look like: 
+
+![global custom settings](imgs/xml_w_global_settings.png)
