@@ -90,7 +90,7 @@ The above result will look like:
 
 Browsers that do not support the console log CSS formatting, so the API won't work as expected. 
 
-Known browsers that do support the CSS formating are:
+Known browsers that do support CSS formating are:
 
 * [Chrome](https://developers.google.com/web/tools/chrome-devtools/console/console-write#string_substitution_and_formatting)
 * [Mozilla](https://developer.mozilla.org/en-US/docs/Web/API/Console#Styling_console_output)
