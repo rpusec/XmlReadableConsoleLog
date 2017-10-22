@@ -178,18 +178,28 @@
 	}
 
 	/**
-	 * Parses an xml string to an actual xml. 
+	 * Parses an xml string to an actual xml. Keep in mind that this 
+	 * is how jQuery implements the function. 
 	 * @param  {String} xml Xml string. 
 	 * @return {Xml}        Actual Xml.
 	 */
-	function parseXML(xml){
-		if ( window.DOMParser ) { // Standard
-			var tmp = new DOMParser();
-			xml = tmp.parseFromString( xml , "text/xml" );
-		} else { // IE
-			xml = new ActiveXObject( "Microsoft.XMLDOM" );
-			xml.async = "false";
-			xml.loadXML( xml );
+	function parseXML(data){
+		var xml;
+		try{
+			if ( window.DOMParser ) { // Standard
+				var tmp = new DOMParser();
+				xml = tmp.parseFromString( data , "text/xml" );
+			} else { // IE
+				xml = new ActiveXObject( "Microsoft.XMLDOM" );
+				xml.async = "false";
+				xml.loadXML( data );
+			}
+		}
+		catch(e){
+			xml = undefined;
+		}
+		if ( !xml || !xml.documentElement || xml.getElementsByTagName( "parsererror" ).length ) {
+			throw new Error ("Invalid XML: " + data );
 		}
 		return xml;
 	}
