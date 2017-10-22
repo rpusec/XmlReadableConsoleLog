@@ -6,7 +6,7 @@
 	<!--<script type="text/javascript" src="src/XmlReadableConsoleLog.js"></script>-->
 
 	<script type="text/javascript">
-		var xmlTest = 	"<bookstore>" +
+		var xml = 	"<bookstore>" +
 						"<book>" + 
 						"<title attrOne=\"valueOne\" attrTwo=\"valueTwo\" attrThree=\"valueThree\">Lorem ipsum dolor sit amet.</title>" +
 						"<author>Aenean malesuada</author>" +
@@ -19,11 +19,13 @@
 						"</book>" + 
 						"</bookstore>";
 
+		console.log(xml);
+
 		//with default settings
-		XmlReadableConsoleLog(xmlTest);
+		XmlReadableConsoleLog(xml);
 
 		//with custom settings
-		XmlReadableConsoleLog(xmlTest, {
+		XmlReadableConsoleLog(xml, {
 			tabSize: 7,
 			css: {
 				element: 'color: #0a1429',
@@ -32,6 +34,15 @@
 				text: 'color: #ff6600',
 			}
 		});
+
+		XmlReadableConsoleLog.globalSettings.setCSS('element', 'color: #000');
+		XmlReadableConsoleLog.globalSettings.setCSS('attrName', 'color: #737373');
+		XmlReadableConsoleLog.globalSettings.setCSS('attrValue', 'color: #a6a6a6');
+		XmlReadableConsoleLog.globalSettings.setCSS('text', 'color: #333333');
+
+		XmlReadableConsoleLog.globalSettings.setTabSize(10);
+
+		XmlReadableConsoleLog(xml);
 	</script>
 
 </head>
