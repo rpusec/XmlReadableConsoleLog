@@ -15,11 +15,10 @@
 			'DocumentFragment': 11,
 			'Notation': 12
 		},
-		NEW_LINE: '\n\r'
 	};
 
 	var defaultSettings = {
-		tabSize: 4,
+		tabSize: 1,
 		css: {
 			element: 'color: #cc0000',
 			attrName: 'color: #ff8c1a',
@@ -34,8 +33,7 @@
 	 * @author rpusec
 	 */
 	function XmlReadableConsoleLog(xml, customSettings){
-		var xmlReadable = new XmlReadable(xml, customSettings);
-		console.log.apply(console, xmlReadable.expectedStyles);
+		new XmlReadable(xml, customSettings);
 	}
 
 	function XmlReadable(xml, customSettings){
@@ -72,21 +70,16 @@
 
 		this.expectedStyles = [];
 		this.readNodeElement(xml.childNodes);
-		this.expectedStyles.unshift(this.processedXmlStr);
 	}
 
 	var proto = XmlReadable.prototype;
 
 	/**
-	 * Reads an XML object line by line, recreates the said XML by concatenating each 
-	 * individual node element to this.processedXmlStr parameter, and adds %c characters to specific positions. 
+	 * Reads an XML object line by line and prints each line colorcoded. 
 	 * @param  {NodeList} childNodes     Current child nodes.
 	 * @return {String}                  Processed string. 
 	 */
 	proto.readNodeElement = function(childNodes, tabAmount){
-		if(!this.processedXmlStr)
-			this.processedXmlStr = '';
-
 		if(!tabAmount)
 			tabAmount = 0;
 
@@ -95,57 +88,64 @@
 
 			switch(parseInt(elemNode.nodeType)){
 				case ENUM.NODE_TYPES.Element : 
+
+					var strElement = '';
+
 					for(var i = 0; i < tabAmount; i++){
-						this.processedXmlStr += this.tab;
+						strElement += this.tab;
 					}
 
-					this.processedXmlStr += this.assocWith(this.css.element, '<' + elemNode.nodeName);
+					strElement += this.assocWith(this.css.element, '<' + elemNode.nodeName);
 
 					if(elemNode.attributes && elemNode.attributes.length > 0){
-						this.processedXmlStr += ' ';
+						strElement += ' ';
 
 						for(var i = 0, attrLength = elemNode.attributes.length; i < attrLength; i++){
 							var notLastItem = (i != attrLength - 1);
 
 							var attr = elemNode.attributes.item(i);
-							this.processedXmlStr += this.assocWith(this.css.attrName, attr.nodeName, notLastItem ? false : !attr.nodeValue);
+							strElement += this.assocWith(this.css.attrName, attr.nodeName, notLastItem ? false : !attr.nodeValue);
 
 							if(attr.nodeValue){
-								this.processedXmlStr += '=';
-								this.processedXmlStr += this.assocWith(this.css.attrValue, '\"' + attr.nodeValue + '\"', !notLastItem);
+								strElement += '=';
+								strElement += this.assocWith(this.css.attrValue, '\"' + attr.nodeValue + '\"', !notLastItem);
 							}
 
 							if(notLastItem)
-								this.processedXmlStr += ' ';
+								strElement += ' ';
 						}
 					}
 
-					this.processedXmlStr += '>';
+					var contRecursion = true;
 
-					var addTabs = true;
-
-					if(elemNode.childNodes && 
-						elemNode.childNodes.length > 0 && 
-						elemNode.childNodes[0].nodeType === ENUM.NODE_TYPES.Text && 
-						elemNode.childNodes[0].textContent)
+					if(elemNode.childNodes && elemNode.childNodes.length > 0)
 					{
-						this.processedXmlStr += this.assocWith(this.css.text, elemNode.childNodes[0].textContent);
-						addTabs = false;
-					}
-					else if(elemNode.childNodes && elemNode.childNodes.length == 0){
-						addTabs = false;
+						strElement += '>';
+
+						if(elemNode.childNodes[0].nodeType === ENUM.NODE_TYPES.Text && elemNode.childNodes[0].textContent){
+							strElement += this.assocWith(this.css.text, elemNode.childNodes[0].textContent);
+							strElement += this.assocWith(this.css.element, '</' + elemNode.nodeName + '>');
+							contRecursion = false;
+						}
 					}
 					else{
-						this.processedXmlStr += ENUM.NEW_LINE;
+						strElement += ' />';
+						contRecursion = false;
 					}
 
-					this.readNodeElement(elemNode.childNodes, tabAmount + 1);
+					this.print(strElement);
 
-					for(var i = 0; addTabs && i < tabAmount; i++){
-						this.processedXmlStr += this.tab;
+					if(contRecursion){
+						this.readNodeElement(elemNode.childNodes, tabAmount + 1);
+
+						strElement = "";
+
+						for(var i = 0; i < tabAmount; i++)
+							strElement += this.tab;
+
+						strElement += this.assocWith(this.css.element, '</' + elemNode.nodeName + '>');
+						this.print(strElement);
 					}
-
-					this.processedXmlStr += '</' + elemNode.nodeName + '>' + ENUM.NEW_LINE;
 					break;
 				case ENUM.NODE_TYPES.Document : 
 				case ENUM.NODE_TYPES.DocumentType : 
@@ -175,6 +175,15 @@
 		}
 
 		return res;
+	}
+
+	proto.print = function(strElement){
+		this.expectedStyles.unshift(strElement);
+
+		console.log.apply(console, this.expectedStyles);
+
+		while(this.expectedStyles.length > 0)
+			this.expectedStyles.pop();
 	}
 
 	/**
@@ -242,7 +251,7 @@
 	function parseTabBySize(size) {
 		var tab = '';
 		for(var i = 0; i < size; i++)
-			tab += ' ';
+			tab += '\t';
 		return tab;
 	}
 
