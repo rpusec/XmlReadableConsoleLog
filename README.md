@@ -1,17 +1,15 @@
 # XmlReadableConsoleLog #
 
-This is a JavaScript library that allows you to print out your XML data on your browser's console in a readable way, by making use of `console.log`'s CSS parsing functionality. 
+This library leverages JavaScript's `console.log` CSS parsing functionality in order to print out your XML data in a readable manner. 
 This library is used specifically for debugging purposes.
-
-Keep in mind that you can display your XML readably without this API, browsers do that natively. However, this library still leverages the ability to display your data in a customizable way. 
 
 ## Examples ##
 
-Let's say that you receive a server response that contains some XML data in string format, and you print it out on your JS console, the value itself might look something along the lines of: 
+Say that you receive a server response that contains an XML output in string format, the output might look something like: 
 
 ![unreadable](docs/imgs/xml_unreadable.png)
 
-Which is clearly unreadable, but this library allows you to display your data as:  
+Which is clearly unreadable, but this library allows you to display your data as: 
 
 ![readable](docs/imgs/xml_readable.png)
 
@@ -98,4 +96,4 @@ Known browsers that do support CSS formating are:
 * [Chrome](https://developers.google.com/web/tools/chrome-devtools/console/console-write#string_substitution_and_formatting)
 * [Mozilla](https://developer.mozilla.org/en-US/docs/Web/API/Console#Styling_console_output)
 
-Moreover, if you're using a browser that does not support CSS formatting, you won't run into any major issues or errors, the only thing that will happen is that the CSS won't be applied in the console. 
+Moreover, if you're using a browser that does not support CSS formatting, you won't run into any major issues, the only thing that will happen is that the CSS won't be applied. 
